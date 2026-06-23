@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran Pasien Klinik</title>
+    <!-- Menggunakan Tailwind CSS untuk Desain Klinis & Clean -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <div class="max-w-2xl mx-auto my-10 px-4">
+        <!-- HEADER KARTU -->
+        <div class="bg-gradient-to-r from-teal-600 to-cyan-600 rounded-t-2xl p-6 shadow-md text-white">
+            <h1 class="text-2xl font-bold tracking-wide text-center uppercase">Formulir Pendaftaran Pasien Klinik</h1>
+            <p class="text-teal-100 text-sm text-center mt-1">Silakan lengkapi data pendaftaran kunjungan Anda dengan benar.</p>
+        </div>
+
+        <!-- FORM UTAMA -->
+        <form id="clinicForm" class="bg-white rounded-b-2xl p-6 md:p-8 shadow-xl border-x border-b border-slate-100 space-y-6">
+            
+            <!-- 1. IDENTITAS PASIEN -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <input type="text" name="Nama Lengkap" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
+                        <div class="mt-2 flex space-x-4">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="Jenis Kelamin" value="Laki-laki" required class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                                <span class="ml-2 text-sm text-slate-700">Laki-laki</span>
+                            </label>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="Jenis Kelamin" value="Perempuan" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                                <span class="ml-2 text-sm text-slate-700">Perempuan</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Tanggal Lahir <span class="text-red-500">*</span></label>
+                        <input type="date" name="Tanggal Lahir" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nomor HP / WhatsApp <span class="text-red-500">*</span></label>
+                    <input type="tel" name="No WhatsApp" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Contoh: 08123456xxx">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Alamat Lengkap <span class="text-red-500">*</span></label>
+                    <textarea name="Alamat" required rows="2" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <!-- 2. STATUS & TUJUAN KUNJUNGAN -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Status Pasien <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Status Pasien" value="Pasien Baru" required class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Pasien Baru</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Status Pasien" value="Pasien Lama" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Pasien Lama</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Metode Pembayaran <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Metode Pembayaran" value="Umum" required class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Umum</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Metode Pembayaran" value="BPJS" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">BPJS</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Metode Pembayaran" value="Asuransi" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Asuransi</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <!-- 3. TUJUAN KUNJUNGAN & KELUHAN -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tujuan Kunjungan <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Tujuan Kunjungan" value="Konsultasi Dokter" required class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Konsultasi Dokter</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Tujuan Kunjungan" value="Pemeriksaan Laboratorium" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Pemeriksaan Laboratorium</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Tujuan Kunjungan" value="Medical Check-Up" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Medical Check-Up</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="Tujuan Kunjungan" id="tujuan_lainnya" value="Lainnya" class="text-teal-600 focus:ring-teal-500 h-4 w-4">
+                            <span class="ml-2 text-sm text-slate-700">Lainnya</span>
+                        </label>
+                    </div>
+                    <!-- Input text tambahan untuk "Lainnya" -->
+                    <div id="input_lainnya_container" class="mt-2 hidden">
+                        <input type="text" id="input_lainnya" name="Tujuan Kunjungan Lainnya" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Sebutkan tujuan kunjungan...">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Keluhan Singkat</label>
+                    <textarea name="Keluhan" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Tuliskan keluhan yang dirasakan jika ada..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Tanggal Kunjungan / Pendaftaran <span class="text-red-500">*</span></label>
+                    <input type="date" name="Tanggal Pendaftaran" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+            </div>
+
+            <!-- 4. PERSETUJUAN -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="flex items-start cursor-pointer">
+                    <input type="checkbox" required class="mt-1 rounded text-teal-600 focus:ring-teal-500 h-4 w-4">
+                    <span class="ml-3 text-sm text-slate-600 leading-tight font-medium">Saya menyatakan data yang diisi sudah benar dan lengkap.</span>
+                </label>
+            </div>
+
+            <!-- BUTTON SUBMIT -->
+            <div>
+                <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-bold py-3 px-6 rounded-xl hover:from-teal-700 hover:to-cyan-700 transition-all text-center shadow-md uppercase tracking-wider text-sm">
+                    Kirim Pendaftaran
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SCRIPT INTERAKTIF -->
+    <script>
+        const radioTujuan = document.getElementsByName('Tujuan Kunjungan');
+        const containerLainnya = document.getElementById('input_lainnya_container');
+        const inputLainnya = document.getElementById('input_lainnya');
+
+        // Memantau perubahan pada pilihan Tujuan Kunjungan
+        radioTujuan.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (document.getElementById('tujuan_lainnya').checked) {
+                    containerLainnya.classList.remove('hidden');
+                    inputLainnya.setAttribute('required', 'true');
+                } else {
+                    containerLainnya.classList.add('hidden');
+                    inputLainnya.removeAttribute('required');
+                    inputLainnya.value = '';
+                }
+            });
+        });
+
+        // Event listener saat form dikirim
+        document.getElementById('clinicForm').addEventListener('submit', function(e) {
+            // Jika kamu menggunakan Formspree/backend, hapus e.preventDefault() di bawah ini
+            e.preventDefault(); 
+            alert('Pendaftaran Pasien Berhasil Terkirim!');
+            this.reset();
+            containerLainnya.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
