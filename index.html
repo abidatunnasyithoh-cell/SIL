@@ -23,7 +23,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
-                    <input type="text" name="Nama Lengkap" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="text" name="Nama Lengkap" id="nama_lengkap" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -42,18 +42,18 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Tanggal Lahir <span class="text-red-500">*</span></label>
-                        <input type="date" name="Tanggal Lahir" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <input type="date" name="Tanggal Lahir" id="tanggal_lahir" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Nomor HP / WhatsApp <span class="text-red-500">*</span></label>
-                    <input type="tel" name="No WhatsApp" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Contoh: 08123456xxx">
+                    <input type="tel" name="No WhatsApp" id="no_whatsapp" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Contoh: 08123456xxx">
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Alamat Lengkap <span class="text-red-500">*</span></label>
-                    <textarea name="Alamat" required rows="2" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+                    <textarea name="Alamat" id="alamat" required rows="2" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
                 </div>
             </div>
 
@@ -126,12 +126,12 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Keluhan Singkat</label>
-                    <textarea name="Keluhan" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Tuliskan keluhan yang dirasakan jika ada..."></textarea>
+                    <textarea name="Keluhan" id="keluhan" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Tuliskan keluhan yang dirasakan jika ada..."></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Tanggal Kunjungan / Pendaftaran <span class="text-red-500">*</span></label>
-                    <input type="date" name="Tanggal Pendaftaran" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="date" name="Tanggal Pendaftaran" id="tanggal_pendaftaran" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 </div>
             </div>
 
@@ -150,15 +150,49 @@
                 </button>
             </div>
         </form>
+
+        <!-- DASHBOARD REKAP DATA PASIEN -->
+        <div class="mt-12 bg-white rounded-2xl p-6 shadow-xl border border-slate-200">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800">📊 Rekap Data Pasien Klinik</h2>
+                    <p class="text-xs text-slate-500">Data tersimpan otomatis di browser ini secara lokal.</p>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button onclick="downloadExcel()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-4 rounded-lg shadow transition-all flex items-center justify-center gap-1">
+                        📥 Unduh Excel (CSV)
+                    </button>
+                    <button onclick="resetData()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2.5 px-3 rounded-lg transition-all" title="Kosongkan Rekap">
+                        🗑️ Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- TABEL REKAP -->
+            <div class="overflow-x-auto border border-slate-100 rounded-xl">
+                <table class="w-full text-sm text-left text-slate-600">
+                    <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                        <tr>
+                            <th class="px-4 py-3">Nama Lengkap</th>
+                            <th class="px-4 py-3">No. WhatsApp</th>
+                            <th class="px-4 py-3">Tujuan Kunjungan</th>
+                            <th class="px-4 py-3">Tgl Kunjungan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rekapTableBody">
+                        <!-- Data otomatis masuk di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <!-- SCRIPT INTERAKTIF -->
+    <!-- SCRIPT INTERAKTIF & REKAP DATA -->
     <script>
         const radioTujuan = document.getElementsByName('Tujuan Kunjungan');
         const containerLainnya = document.getElementById('input_lainnya_container');
         const inputLainnya = document.getElementById('input_lainnya');
 
-        // Memantau perubahan pada pilihan Tujuan Kunjungan
         radioTujuan.forEach(radio => {
             radio.addEventListener('change', function() {
                 if (document.getElementById('tujuan_lainnya').checked) {
@@ -172,14 +206,109 @@
             });
         });
 
-        // Event listener saat form dikirim
+        document.addEventListener('DOMContentLoaded', muatTabelRekap);
+
         document.getElementById('clinicForm').addEventListener('submit', function(e) {
-            // Jika kamu menggunakan Formspree/backend, hapus e.preventDefault() di bawah ini
             e.preventDefault(); 
-            alert('Pendaftaran Pasien Berhasil Terkirim!');
+
+            const nama = document.getElementById('nama_lengkap').value;
+            const jk = document.querySelector('input[name="Jenis Kelamin"]:checked').value;
+            const tglLahir = document.getElementById('tanggal_lahir').value;
+            const wa = document.getElementById('no_whatsapp').value;
+            const alamat = document.getElementById('alamat').value;
+            const statusPasien = document.querySelector('input[name="Status Pasien"]:checked').value;
+            const metodeBayar = document.querySelector('input[name="Metode Pembayaran"]:checked').value;
+            
+            let tujuan = document.querySelector('input[name="Tujuan Kunjungan"]:checked').value;
+            if (tujuan === "Lainnya") {
+                tujuan = inputLainnya.value;
+            }
+            
+            const keluhan = document.getElementById('keluhan').value || "-";
+            const tglKunjungan = document.getElementById('tanggal_pendaftaran').value;
+
+            const pasienBaru = { nama, jk, tglLahir, wa, alamat, statusPasien, metodeBayar, tujuan, keluhan, tglKunjungan };
+
+            let databaseKlinik = JSON.parse(localStorage.getItem('databaseKlinik')) || [];
+            databaseKlinik.push(pasienBaru);
+            localStorage.setItem('databaseKlinik', JSON.stringify(databaseKlinik));
+
+            alert('Pendaftaran Berhasil! Data Anda telah direkap di tabel bawah.');
+            
             this.reset();
             containerLainnya.classList.add('hidden');
+            muatTabelRekap();
         });
+
+        function muatTabelRekap() {
+            const databaseKlinik = JSON.parse(localStorage.getItem('databaseKlinik')) || [];
+            const tbody = document.getElementById('rekapTableBody');
+            tbody.innerHTML = '';
+
+            if (databaseKlinik.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-4 text-center text-slate-400 italic">Belum ada rekap pendaftaran pasien.</td></tr>`;
+                return;
+            }
+
+            [...databaseKlinik].reverse().forEach(pasien => {
+                const row = `
+                    <tr class="bg-white border-b hover:bg-slate-50 transition-colors">
+                        <td class="px-4 py-3 font-semibold text-slate-900">${pasien.nama}</td>
+                        <td class="px-4 py-3">${pasien.wa}</td>
+                        <td class="px-4 py-3">${pasien.tujuan}</td>
+                        <td class="px-4 py-3">${pasien.tglKunjungan}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function downloadExcel() {
+            const databaseKlinik = JSON.parse(localStorage.getItem('databaseKlinik')) || [];
+            if (databaseKlinik.length === 0) {
+                alert('Tidak ada data pasien untuk diunduh!');
+                return;
+            }
+
+            let csvRows = [];
+            const headers = ["Nama Lengkap", "Jenis Kelamin", "Tanggal Lahir", "No WhatsApp", "Alamat", "Status Pasien", "Metode Pembayaran", "Tujuan Kunjungan", "Keluhan Singkat", "Tanggal Kunjungan"];
+            csvRows.push(headers.join(","));
+
+            databaseKlinik.forEach(p => {
+                const values = [
+                    `"${p.nama}"`,
+                    `"${p.jk}"`,
+                    `"${p.tglLahir}"`,
+                    `"${p.wa}"`,
+                    `"${p.alamat.replace(/\n/g, ' ')}"`,
+                    `"${p.statusPasien}"`,
+                    `"${p.metodeBayar}"`,
+                    `"${p.tujuan}"`,
+                    `"${p.keluhan.replace(/\n/g, ' ')}"`,
+                    `"${p.tglKunjungan}"`
+                ];
+                csvRows.push(values.join(","));
+            });
+
+            const csvContent = "\uFEFF" + csvRows.join("\n");
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            
+            link.setAttribute("href", url);
+            link.setAttribute("download", "Rekap_Pendaftaran_Pasien.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function resetData() {
+            if (confirm('Apakah Anda yakin ingin mengosongkan seluruh tabel rekap data pasien?')) {
+                localStorage.removeItem('databaseKlinik');
+                muatTabelRekap();
+            }
+        }
     </script>
 </body>
+</html>
 </html>
